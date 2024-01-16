@@ -11,15 +11,20 @@
     <div class="col-md-12">
       <h2>Items</h2>
       {% for item in items %}
-        <form action="/update_status/{{item['id']}}" method="post">
-          {% if item['status'] == 'Completed' %}
-            <input type ="checkbox" name="checkbox" value = "{{item['id']}}" onchange = "this.form.submit()" checked>
-          {% else %}
-            <input type ="checkbox" name="checkbox" value = "{{item['id']}}" onchange = "this.form.submit()">
-          {% endif %}
-            {{item['title']}}
-          </input>
-        </form>
+        <div class="d-flex">
+          <form action="/update_status/{{item['id']}}" method="post">
+            {% if item['status'] == 'Completed' %}
+              <input type ="checkbox" name="checkbox" value = "{{item['id']}}" onchange = "this.form.submit()" checked>
+            {% else %}
+              <input type ="checkbox" name="checkbox" value = "{{item['id']}}" onchange = "this.form.submit()">
+            {% endif %}
+              {{item['title']}}
+            </input>
+          </form>
+          <form action="/delete_item/{{item['id']}}" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
       {% endfor %}
     </div>
   </div>

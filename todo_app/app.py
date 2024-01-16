@@ -27,3 +27,9 @@ def update_status(item_id):
     item['status'] = 'Completed' if item_checked else 'Not Started'
     save_item(item)
     return redirect('/')
+
+@app.route('/delete_item/<item_id>', methods=['POST'])
+def delete(item_id):
+    item = get_item(item_id)
+    delete_item(item)
+    return redirect('/')
