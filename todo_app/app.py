@@ -17,3 +17,12 @@ def add():
     title = request.form.get('item')
     add_item(title)
     return redirect('/')
+
+@app.route('/update_status/<item_id>', methods=['POST'])
+def update_status(item_id):
+    item_checked = False if not request.form.get('checkbox') else True
+    item = get_item(item_id)
+    item['status'] = 'Completed' if item_checked else 'Not Started'
+    save_item(item)
+    return redirect('/')
+
