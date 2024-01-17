@@ -22,9 +22,8 @@ def add():
 
 @app.route('/update_status/<item_id>', methods=['POST'])
 def update_status(item_id):
-    item_checked = False if not request.form.get('checkbox') else True
     item = get_item(item_id)
-    item['status'] = 'Completed' if item_checked else 'Not Started'
+    item['status'] = 'Completed' if item['status'] == 'Not Started' else 'Not Started'
     save_item(item)
     return redirect('/')
 
