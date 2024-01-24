@@ -7,12 +7,37 @@
     <p class="lead">Just another to-do app.</p>
   </div>
 
-  <div class="row">
+  <div class="row my-3">
     <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
+      <h2 class="mb-3">Items</h2>
+      {% for item in items %}
+        <div class="shadow rounded my-3 p-3 {{'bg-secondary' if item['status'] == 'Completed' else ''}}">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1">{{item['title']}}</div>
+            <form action="/update_status/{{item['id']}}" method="post">
+              {% if item['status'] == 'Completed' %}
+                <button type="submit" class="btn btn-light m-2">Reopen</button>
+              {% else %}
+                <button type="submit" class="btn btn-info m-2">Mark complete</button>
+              {% endif %}
+            </form>
+            <form action="/delete_item/{{item['id']}}" method="post">
+              <button type="submit" class="btn btn-danger m-2">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row my-5">
+    <div class="col-md-12">
+      <form action="/add" method="post">
+        <div class="d-flex align-items-center">
+          <input type="text" name="item" id="item" class="form-control" placeholder="Add an item..." required />
+          <button type="submit" class="btn btn-success px-3 mx-2">Add</button>
+        </div>
+      </form>
     </div>
   </div>
 {% endblock %}
