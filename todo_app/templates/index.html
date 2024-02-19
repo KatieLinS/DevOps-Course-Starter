@@ -10,23 +10,25 @@
   <div class="row my-3">
     <div class="col-md-12">
       <h2 class="mb-3">Items</h2>
-      {% for item in items %}
-        <div class="shadow rounded my-3 p-3 {{'bg-secondary' if item['status'] == 'Completed' else ''}}">
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1">{{item['title']}}</div>
-            <form action="/update_status/{{item['id']}}" method="post">
-              {% if item['status'] == 'Completed' %}
-                <button type="submit" class="btn btn-light m-2">Reopen</button>
-              {% else %}
-                <button type="submit" class="btn btn-info m-2">Mark complete</button>
-              {% endif %}
-            </form>
-            <form action="/delete_item/{{item['id']}}" method="post">
-              <button type="submit" class="btn btn-danger m-2">Delete</button>
-            </form>
-          </div>
+      <div class="container">
+        <div class="row">
+          {% for item in items %}
+            <div class="col-4 my-3 px-2">
+              <div class="shadow rounded p-4 col-12 h-100 {{'bg-secondary' if item.status == 'Done' else ''}}">
+                <div class="d-flex flex-column h-100">
+                  <h5>{{item.name}}</h5>
+                  <p class="flex-grow-1 font-weight-lighter">{{item.description}}</p>
+                  {% if item.status == 'Done' %}
+                    <a href="{{url_for('reopen_item', item_id=item.id)}}" class="btn btn-light">Reopen</a>
+                  {% else %}
+                    <a href="{{url_for('complete_item', item_id=item.id)}}" class="btn btn-info">Mark complete</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
+      </div>
     </div>
   </div>
 
