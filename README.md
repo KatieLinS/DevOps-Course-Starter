@@ -42,7 +42,7 @@ Please update the following variables:
 
 - [SECRET_KEY](https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
 - [TRELLO_API_KEY](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and [TRELLO_API_TOKEN](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization) variables which are used for Trello delegated authentication and authorization.
-- **BOARD_ID** and **DEFAULT_LIST_ID** variables for the default Trello board and list.
+- **BOARD_ID**, **TODO_LIST_ID** and **DONE_LIST_ID** variables for the default Trello board and list.
 
 
 ## Running the App
