@@ -64,3 +64,16 @@ Press CTRL+C to quit
  * Debugger PIN: 113-666-066
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running the test
+Run `poetry add pytest` to install pytest in your project
+
+### In a terminal
+Run `poetry run pytest` to run the tests
+
+### In VS Code 
+(make sure you have python extension installed)
+- click on the Flask icon on the left bar
+- click `Configure Python Tests`
+- choose `pytest`
+- select a folder (`root` or `todo app`)
