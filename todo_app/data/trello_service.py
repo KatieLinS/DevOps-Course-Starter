@@ -1,5 +1,6 @@
 import os
 import requests
+from todo_app.data.item import Item
 
 
 class TrelloService():
@@ -24,16 +25,20 @@ class TrelloService():
         return requests.request(action, url, headers=self.headers, params=query)
 
     def get_cards_from_board(self):
-        url = f"{self.base_url}1/boards/{self.board_id}/cards"
-        response = self.send_request(url, self.base_query)
+        url = f"{self.base_url}1/boards/{self.board_id}/lists"
+        query = self.base_query | {
+            'cards': "open"
+        }
+        response = self.send_request(url, query)
 
-        return response.json()
+        lists = response.json()
+        items = []
 
-    def get_list_from_board(self, list_id):
-        url = f"{self.base_url}1/lists/{list_id}"
-        response = self.send_request(url, self.base_query)
+        for list in lists:
+            for card in list['cards']:
+                items.append(Item.from_trello_card(card, list))
 
-        return response.json()
+        return items
 
     def add_item(self, title):
         url = f"{self.base_url}1/cards"
