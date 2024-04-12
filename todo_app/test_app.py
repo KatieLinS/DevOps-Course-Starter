@@ -30,7 +30,6 @@ class StubResponse():
 def stub(action, url, headers={},  params={}):
     test_board_id = os.environ.get('BOARD_ID')
 
-    print(url)
     if url == f'https://api.trello.com/1/boards/{test_board_id}/lists':
         fake_response_data = [{
             'id': '123abc',

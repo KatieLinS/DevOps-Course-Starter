@@ -66,7 +66,6 @@ Press CTRL+C to quit
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 ## Running the test
-Run `poetry add pytest` to install pytest in your project
 
 ### In a terminal
 Run `poetry run pytest` to run the tests

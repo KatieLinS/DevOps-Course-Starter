@@ -35,7 +35,6 @@ class TrelloService():
         items = []
 
         for list in lists:
-            print(list)
             for card in list['cards']:
                 items.append(Item.from_trello_card(card, list))
 
