@@ -68,11 +68,37 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Running the test
 
 ### In a terminal
+
 Run `poetry run pytest` to run the tests
 
 ### In VS Code 
+
 (make sure you have python extension installed)
 - click on the Flask icon on the left bar
 - click `Configure Python Tests`
 - choose `pytest`
 - select a folder (`root` or `todo app`)
+
+## Hosting To-Do app on Virtual Machines using Ansible
+
+### Prerequisite
+
+Using `ssh-copy-id USERNAME@IP-ADDRESS`,
+- Add your machine's public SSH keys to the Control Node 
+- Add the Control Node's public SSH keys to all the Managed Nodes
+
+(Run `ssh-keygen` to generate an SSH key pair if the machine doesn't already have one.)
+
+### Deployment
+
+- copy the `ansible` folder to the Control Node (You can use a command similar to the following line)
+
+    ```bash
+    scp -r /path/to/folder/ansible  USERNAME@IP-ADDRESS:/path/to/copy
+    ```    
+- run the following command to deploy the app on Managed Nodes
+    
+    ```bash
+    ansible-playbook ./ansible/my-ansible-playbook.yml -i ./ansible/my-ansible-inventory 
+    ```
+    (You will be prompted to provide the Trello Api Key and Token)
