@@ -1,0 +1,16 @@
+services:
+  todoapp:
+    image: todo-app:dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    platform: linux/amd64
+    ports:
+      - target: 5000
+        published: 5001
+    working_dir: /
+    env_file:
+      - .env
+    volumes:
+      - ./todo_app:/todo_app
+

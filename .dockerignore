@@ -1,0 +1,7 @@
+.env
+.git
+.vscode
+.venv
+Dockerfile
+ansible
+**/__pycache__

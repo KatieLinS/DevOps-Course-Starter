@@ -102,3 +102,31 @@ Using `ssh-copy-id USERNAME@IP-ADDRESS`,
     ansible-playbook ./ansible/my-ansible-playbook.yml -i ./ansible/my-ansible-inventory 
     ```
     (You will be prompted to provide the Trello Api Key and Token)
+
+## Building and running development and production containers in Docker
+### Development
+
+Please run ```docker compose up``` to build and run the container for development 
+
+Alternatively, you can build the container with the command below
+```bash
+docker build --target development --tag todo-app:dev .
+``` 
+
+and run the container with the command below
+```bash
+docker run --env-file .env --publish 5001:5000 -it --mount "type=bind,source=$(pwd)/todo_app,target=/todo_app" todo-app:dev
+```
+
+### Production
+
+For building the container
+```bash
+docker build --target production --tag todo-app:prod .
+```
+
+For running the container
+
+```bash
+docker run --env-file .env --publish 5001:5000 -it todo-app:prod
+```
