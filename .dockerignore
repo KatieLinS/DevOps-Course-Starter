@@ -3,4 +3,5 @@
 .vscode
 .venv
 Dockerfile
-ansible/
+ansible
+**/__pycache__

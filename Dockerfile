@@ -7,7 +7,7 @@ ENV PATH=$PATH:/root/.local/bin/
 # Set work directory
 WORKDIR /
 # Copy across pyproject.toml
-COPY pyproject.toml /
+COPY poetry.lock pyproject.toml /
 # Install poetry
 RUN poetry install
 # Copy across application code as the last step to optimise building process
