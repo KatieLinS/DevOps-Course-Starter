@@ -103,7 +103,7 @@ Using `ssh-copy-id USERNAME@IP-ADDRESS`,
     ```
     (You will be prompted to provide the Trello Api Key and Token)
 
-## Building and running development and production containers in Docker
+## Building and running development, production and test containers in Docker
 ### Development
 
 Please run ```docker compose up``` to build and run the container for development 
@@ -129,4 +129,17 @@ For running the container
 
 ```bash
 docker run --env-file .env --publish 5001:5000 -it todo-app:prod
+```
+
+### Test
+
+For building the container
+```bash
+docker build --target test --tag todo-app:test .
+```
+
+For running the container
+
+```bash
+docker run todo-app:test
 ```

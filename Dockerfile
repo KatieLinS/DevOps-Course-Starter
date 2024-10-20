@@ -14,7 +14,7 @@ RUN poetry install
 COPY . /
 
 
-# Configure for local development
+# Configure for development
 FROM base AS development
 ENV FLASK_DEBUG=true
 ENTRYPOINT poetry run flask run --host 0.0.0.0
@@ -27,6 +27,7 @@ ENV FLASK_DEBUG=false
 ENTRYPOINT poetry run flask run --host 0.0.0.0
 
 
-# Configure for testing
-# FROM base AS testing
-# ENTRYPOINT poetry run flask run --host 0.0.0.0
+# Configure for test
+FROM base AS test
+WORKDIR /todo_app
+ENTRYPOINT poetry run pytest
