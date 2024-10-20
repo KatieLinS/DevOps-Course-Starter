@@ -143,3 +143,23 @@ For running the container
 ```bash
 docker run todo-app:test
 ```
+
+## Hosting the container image on DockerHub
+### Login to docker 
+```bash
+docker login
+```
+### Build and push the image onto Docker Hub
+```bash
+docker build --target production --tag katielht/todo-app:prod .  
+docker push katielht/todo-app:prod                                                              
+```
+Add `--platform=linux/amd64` to the build command if you are building on a Mac M1.
+
+The image of the todo app is deployed to DockerHub at https://hub.docker.com/repository/docker/katielht/todo-app/general 
+
+
+## Host the frontend on Azure Web App
+The todo app is created and hosted on https://katlin-todo-app.azurewebsites.net/ 
+
+To update the app, rebuild and push the image to Docker Hub, and run `curl -v -X POST '<webhook>'` or make a POST request to the webhook in Thunder Client in VSCode. You can find the webhook under Deployment Center on the app service’s page in the Azure portal.
