@@ -29,6 +29,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: docker build --target production --tag katielht/todo-app:prod .
     - run: docker push katielht/todo-app:prod
+    - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
 
 
 
