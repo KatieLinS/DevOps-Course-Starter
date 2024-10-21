@@ -3,11 +3,8 @@
   remote_user: ec2-user
 
   vars_prompt:
-  - name: trello_api_key
-    prompt: What is your TRELLO API KEY?
-
-  - name: trello_api_token
-    prompt: What is your TRELLO API TOKEN?
+  - name: mongodb_primary_connection_string
+    prompt: What is your PRIMARY CONNECTION STRING for MongoDB?
 
   tasks:
   - name: Install Git
