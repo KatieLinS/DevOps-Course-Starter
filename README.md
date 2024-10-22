@@ -41,8 +41,7 @@ The `.env` file is used by flask to set environment variables when running `flas
 Please update the following variables:
 
 - [SECRET_KEY](https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
-- [TRELLO_API_KEY](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and [TRELLO_API_TOKEN](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization) variables which are used for Trello delegated authentication and authorization.
-- **BOARD_ID**, **TODO_LIST_ID** and **DONE_LIST_ID** variables for the default Trello board and list.
+- [MONGOBD_PRIMARY_CONNECTION_STRING](https://portal.azure.com/#@devops.corndel.com/resource/subscriptions/d33b95c7-af3c-4247-9661-aa96d47fccc0/resourceGroups/cohort32-33_KatLin_ProjectExercise/providers/Microsoft.DocumentDB/databaseAccounts/katlin-cosmosdb/Connection%20strings) variable which is used for connecting to MongoDB.
 
 
 ## Running the App
@@ -101,7 +100,7 @@ Using `ssh-copy-id USERNAME@IP-ADDRESS`,
     ```bash
     ansible-playbook ./ansible/my-ansible-playbook.yml -i ./ansible/my-ansible-inventory 
     ```
-    (You will be prompted to provide the Trello Api Key and Token)
+    (You will be prompted to provide the PRIMARY CONNECTION STRING for MongoDB)
 
 ## Building and running development, production and test containers in Docker
 ### Development
