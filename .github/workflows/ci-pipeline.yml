@@ -16,9 +16,12 @@ jobs:
       run: docker build --target test --tag todo-app:test .
     - name: test
       id: test
-      run: docker run todo-app:test | echo "Worker ran out of memory."
+      run: | 
+        docker run todo-app:test
+        echo "Worker ran out of memory."
+        exit 1
     - name: retest
-      if: ${{ contains(steps.test.outputs.response, 'Worker ran out of memory.') }}
+      if: ${{ failure() }}
       run: docker run todo-app:test
 
   push-and-deploy:
