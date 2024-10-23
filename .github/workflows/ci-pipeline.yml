@@ -12,9 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: docker build --target test --tag todo-app:test .
-    - run: docker run todo-app:test
-  
+    - name: build
+      run: docker build --target test --tag todo-app:test .
+    - name: test
+      id: test
+      run: docker run todo-app:test
+    - name: retest
+      if: ${{ contains(steps.test.outputs.response, 'Worker ran out of memory.') }}
+      run: docker run todo-app:test
+
   push-and-deploy:
     name: Push to Docker Hub and deploy
     runs-on: ubuntu-latest
