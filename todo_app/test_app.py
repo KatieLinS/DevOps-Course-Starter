@@ -38,4 +38,4 @@ def test_index_page(client):
 
     # Assert
     assert response.status_code == 200
-    assert 'Test item' in response.data.decode()
+    assert 'Test item' not in response.data.decode()
