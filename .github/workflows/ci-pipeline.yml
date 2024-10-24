@@ -29,6 +29,7 @@ jobs:
       if: ${{ failure() && contains(steps.test.outputs.test_output, 'Worker ran out of memory.') }}
       run: | 
         docker run todo-app:test
+        exit 1
     - name: output
       if: always() && steps.test.outcome != 'success' && steps.retest.outcome != 'success'
       run: | 
