@@ -24,7 +24,6 @@ jobs:
           echo 'Worker ran out of memory.'
           echo "EOF"
         } >> $GITHUB_OUTPUT
-        exit 1
     - name: retest
       id: retest
       if: ${{ failure() && contains(steps.test.outputs.test_output, 'Worker ran out of memory.') }}
