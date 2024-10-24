@@ -21,7 +21,6 @@ jobs:
         {
           echo "test_output<<EOF"
           docker run todo-app:test
-          echo 'Worker ran out of memory.'
           echo "EOF"
         } >> $GITHUB_OUTPUT
         exit 1
