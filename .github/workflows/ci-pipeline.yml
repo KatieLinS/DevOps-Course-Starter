@@ -17,7 +17,8 @@ jobs:
     - name: test
       id: test
       run: | 
-        if docker run todo-app:test | grep -q 'FAILURES'; then
+        docker run todo-app:test | tee test_output.txt
+        if grep 'FAILURES' test_output.txt; then
           echo "retest=true" >> $GITHUB_OUTPUT
         fi
     - name: output
