@@ -162,3 +162,12 @@ The image of the todo app is deployed to DockerHub at https://hub.docker.com/rep
 The todo app is created and hosted on https://katlin-todo-app.azurewebsites.net/ 
 
 To update the app, rebuild and push the image to Docker Hub, and run `curl -v -X POST '<webhook>'` or make a POST request to the webhook in Thunder Client in VSCode. You can find the webhook under Deployment Center on the app service’s page in the Azure portal.
+
+
+## Data encryption
+
+### Encryption-at-rest
+All user data stored in Azure Cosmos DB API for MongoDB is encrypted at rest and in transport, i.e. data encryption is "on" by default.
+
+### Encryption-in-transit
+All traffic to our app service via HTTP is forced to redirect to HTTPs. Traffic between the application and the DB is also encrypted-in-transit by default.
