@@ -31,3 +31,9 @@ ENTRYPOINT poetry run flask run --host 0.0.0.0
 FROM base AS test
 WORKDIR /todo_app
 ENTRYPOINT poetry run pytest
+
+
+# Configure for dependency check
+FROM base AS dependency-check
+WORKDIR /todo_app
+ENTRYPOINT poetry run safety check
