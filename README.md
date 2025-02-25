@@ -105,7 +105,7 @@ Using `ssh-copy-id USERNAME@IP-ADDRESS`,
 ## Building and running development, production and test containers in Docker
 ### Development
 
-Please run ```docker compose up``` to build and run the container for development 
+Please run ```docker compose up --build``` to build and run the container for development 
 
 Alternatively, you can build the container with the command below
 ```bash
@@ -171,3 +171,7 @@ All user data stored in Azure Cosmos DB API for MongoDB is encrypted at rest and
 
 ### Encryption-in-transit
 All traffic to our app service via HTTP is forced to redirect to HTTPs. Traffic between the application and the DB is also encrypted-in-transit by default.
+
+
+## Logging
+Update the `LOGGLY_TOKEN` in the env files to send app logs to Loggly. 
