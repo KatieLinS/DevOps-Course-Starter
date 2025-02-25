@@ -9,7 +9,7 @@ WORKDIR /
 # Copy across pyproject.toml
 COPY poetry.lock pyproject.toml /
 # Install poetry
-RUN poetry install
+RUN poetry install --no-root
 # Copy across application code as the last step to optimise building process
 COPY . /
 
