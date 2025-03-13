@@ -51,6 +51,7 @@ jobs:
       TF_VAR_prefix: "katlin-tf"
       TF_VAR_OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
       TF_VAR_OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
+      TF_VAR_LOGGLY_TOKEN: ${{ secrets.LOGGLY_TOKEN }}
     steps: 
     - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v3
