@@ -5,3 +5,10 @@
 Dockerfile
 ansible
 **/__pycache__
+
+## Terraform
+**/.terraform/*
+.terraform.lock.hcl
+*.tfstate
+*.tfstate*
+*.tfvars
