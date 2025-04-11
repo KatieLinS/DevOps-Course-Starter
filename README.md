@@ -46,6 +46,11 @@ Please update the following variables:
 
 ## Running the App
 
+<details>
+<summary> Using CLI </summary> 
+
+### Using CLI
+
 Once the all dependencies have been installed, start the Flask app in development mode within the Poetry environment by running:
 ```bash
 $ poetry run flask run
@@ -64,45 +69,13 @@ Press CTRL+C to quit
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
-## Running the test
+</details>
 
-### In a terminal
 
-Run `poetry run pytest` to run the tests
+<details>
+<summary> Using Docker </summary> 
 
-### In VS Code 
-
-(make sure you have python extension installed)
-- click on the Flask icon on the left bar
-- click `Configure Python Tests`
-- choose `pytest`
-- select a folder (`root` or `todo app`)
-
-## Hosting To-Do app on Virtual Machines using Ansible
-
-### Prerequisite
-
-Using `ssh-copy-id USERNAME@IP-ADDRESS`,
-- Add your machine's public SSH keys to the Control Node 
-- Add the Control Node's public SSH keys to all the Managed Nodes
-
-(Run `ssh-keygen` to generate an SSH key pair if the machine doesn't already have one.)
-
-### Deployment
-
-- copy the `ansible` folder to the Control Node (You can use a command similar to the following line)
-
-    ```bash
-    scp -r /path/to/folder/ansible  USERNAME@IP-ADDRESS:/path/to/copy
-    ```    
-- run the following command to deploy the app on Managed Nodes
-    
-    ```bash
-    ansible-playbook ./ansible/my-ansible-playbook.yml -i ./ansible/my-ansible-inventory 
-    ```
-    (You will be prompted to provide the PRIMARY CONNECTION STRING for MongoDB)
-
-## Building and running development, production and test containers in Docker
+### Using Docker
 ### Development
 
 Please run ```docker compose up --build``` to build and run the container for development 
@@ -130,7 +103,67 @@ For running the container
 docker run --env-file .env --publish 5001:5000 -it todo-app:prod
 ```
 
-### Test
+### Hosting the container image on DockerHub
+#### Login to docker 
+```bash
+docker login
+```
+#### Build and push the image onto Docker Hub
+```bash
+docker build --target production --tag katielht/todo-app:prod .  
+docker push katielht/todo-app:prod                                                              
+```
+Add `--platform=linux/amd64` to the build command if you are building on a Mac M1.
+
+The image of the todo app is deployed to DockerHub at https://hub.docker.com/repository/docker/katielht/todo-app/general 
+
+</details>
+
+<details>
+<summary> Using Minikubes </summary> 
+
+### Using Minikubes
+
+Install
+1. Docker
+2. [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+3. [minikube](https://minikube.sigs.k8s.io/docs/start/)
+
+Make sure Docker is running and run `minikube start`
+
+Build the production image and load it to minikube
+```bash
+docker build --target production --tag todo-app:prod .
+minikube image load todo-app:prod
+```
+
+Run these to deploy the Pod and Service
+```bash
+kubectl apply -f minikube/deployment.yaml 
+kubectl apply -f minikube/service.yaml 
+```
+
+Download the `variables` file from Keeper and place it in the `minikube` folder.
+
+After each deployment, we need to run `kubectl port-forward service/module-14 7080:80` to link up our minikube Service with a port on localhost.
+
+</details>
+
+## Running the test
+
+### In a terminal
+
+Run `poetry run pytest` to run the tests
+
+### In VS Code 
+
+(make sure you have python extension installed)
+- click on the Flask icon on the left bar
+- click `Configure Python Tests`
+- choose `pytest`
+- select a folder (`root` or `todo app`)
+
+### Using Docker Container
 
 For building the container
 ```bash
@@ -143,19 +176,29 @@ For running the container
 docker run todo-app:test
 ```
 
-## Hosting the container image on DockerHub
-### Login to docker 
-```bash
-docker login
-```
-### Build and push the image onto Docker Hub
-```bash
-docker build --target production --tag katielht/todo-app:prod .  
-docker push katielht/todo-app:prod                                                              
-```
-Add `--platform=linux/amd64` to the build command if you are building on a Mac M1.
+## Hosting To-Do app on Virtual Machines using Ansible
 
-The image of the todo app is deployed to DockerHub at https://hub.docker.com/repository/docker/katielht/todo-app/general 
+### Prerequisite
+
+Using `ssh-copy-id USERNAME@IP-ADDRESS`,
+- Add your machine's public SSH keys to the Control Node 
+- Add the Control Node's public SSH keys to all the Managed Nodes
+
+(Run `ssh-keygen` to generate an SSH key pair if the machine doesn't already have one.)
+
+### Deployment
+
+- copy the `ansible` folder to the Control Node (You can use a command similar to the following line)
+
+    ```bash
+    scp -r /path/to/folder/ansible  USERNAME@IP-ADDRESS:/path/to/copy
+    ```    
+- run the following command to deploy the app on Managed Nodes
+    
+    ```bash
+    ansible-playbook ./ansible/my-ansible-playbook.yml -i ./ansible/my-ansible-inventory 
+    ```
+    (You will be prompted to provide the PRIMARY CONNECTION STRING for MongoDB)
 
 
 ## Host the frontend on Azure Web App

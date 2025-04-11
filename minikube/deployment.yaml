@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: module-14
+spec:
+  selector:
+    matchLabels:
+      app: module-14
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: module-14
+    spec:
+      containers:
+        - name: todo-app
+          image: todo-app:prod
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 5000
+          env:
+            - name: FLASK_APP
+              value: "todo_app/app"
+            - name: FLASK_DEBUG
+              value: "true"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef: 
+                  name: todo-app-secrets
+                  key: SECRET_KEY
+            - name: MONGOBD_PRIMARY_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef: 
+                  name: todo-app-secrets
+                  key: MONGOBD_PRIMARY_CONNECTION_STRING
+            - name: MONGO_DATABASE_NAME
+              value: "todo_app_database"
+            - name: MONGO_COLLECTION_NAME
+              value: "todo_app_collection"
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef: 
+                  name: todo-app-secrets
+                  key: OAUTH_CLIENT_ID
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef: 
+                  name: todo-app-secrets
+                  key: OAUTH_CLIENT_SECRET
+            - name: OAUTHLIB_INSECURE_TRANSPORT
+              value: "1"
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef: 
+                  name: todo-app-secrets
+                  key: LOGGLY_TOKEN
+
+
