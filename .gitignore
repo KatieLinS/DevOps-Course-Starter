@@ -125,3 +125,6 @@ env/
 *.tfstate
 *.tfstate*
 *.tfvars
+
+# minikube variables
+minikube/variables
